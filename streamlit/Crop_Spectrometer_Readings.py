@@ -77,14 +77,14 @@ with open("./pickle_objects/tsne3d.pkl", "rb") as file:
 col3, col4 = st.columns([1,5])
 with col3:
     st.markdown("**Select Dimension:**")
-    genre = st.radio(
+    d1 = st.radio(
     "**Dimensions**",
     (2,3),
     index=1,
     label_visibility="collapsed")
 with col4:
-    if genre:
-        if genre == 2:
+    if d1:
+        if d1 == 2:
             fig, ax = plt.subplots()
             plt.scatter(tsne2df['Dimension 1'], tsne2df['Dimension 2'], c=tsne2df['ePred'])
             plt.xlabel('Dimension 1')
@@ -188,26 +188,26 @@ From the article referenced [here](https://nirpyresearch.com/classification-nir-
 st.image("./plots/cumulvarpercent.png")
 st.markdown("If we follow that rule, we should only use the first component as it explains almost 100% of the original data. I decide to use the first 6 principal components instead, which explains around 90% of the first derivative data. In a 23-parameter dataset, it is unlikely that only the first principal component of PCA will capture all the essential information. While the first PC accounts for the largest variance in the data, it may not necessarily encompass all the meaningful patterns and relationships present in the dataset. Subsequent PCs capture additional variations orthogonal to the previous ones, providing a more comprehensive representation of the data.")
 
-col7, col8 = st.columns([1,5])
-
 with open("./pickle_objects/pcscores.pkl", "rb") as file:
     Xt2 = pickle.load(file)
 with open("./pickle_objects/ytrain.pkl", "rb") as file:
     y_train = pickle.load(file)    
 with open("./pickle_objects/label_mapping.pkl", "rb") as file:
-    label_mapping = pickle.load(file)       
-    
-with col3:
+    label_mapping = pickle.load(file)   
+
+col7, col8 = st.columns([1,5])
+        
+with col7:
     st.markdown("**Select Dimension:**")
-    genre = st.radio(
+    d2 = st.radio(
     "**Dimensions**",
     (2,3),
     index=1,
     label_visibility="collapsed",
     key=2)
-with col4:
-    if genre:
-        if genre == 2:
+with col8:
+    if d2:
+        if d2 == 2:
             st.image('./plots/2dpca.png')
         else:
             pc1_scores = Xt2[:, 0]
