@@ -32,12 +32,7 @@ A total of 2650 grains of barley, chickpea and sorghum cultivars were scanned us
 
 Column 740 to 1070 corresponds to the SCIO wavelengths, measured in nanometers (331 variables)
 ''')
-st.dataframe(df.iloc[[1,50,100,150,200,250]])
+st.dataframe(df.iloc[[1,50,100,150,200,250]],hide_index=True)
        
 
-col1, col2 = st.columns(2)
-with col1:
-    st.dataframe(df.iloc[[1,50,100,150,200,250]])
-with col2:
-    st.write("Crop")
 
