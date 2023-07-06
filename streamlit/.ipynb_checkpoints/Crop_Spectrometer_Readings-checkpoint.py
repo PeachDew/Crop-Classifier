@@ -85,7 +85,8 @@ with col4:
     if d1:
         if d1 == 2:
             fig, ax = plt.subplots()
-            plt.scatter(tsne2df['Dimension 1'], tsne2df['Dimension 2'], c=tsne2df['ePred'])
+            plt.scatter(tsne2df['Dimension 1'], tsne2df['Dimension 2'],
+                        c=tsne2df['ePred'])
             plt.xlabel('Dimension 1')
             plt.ylabel('Dimension 2')
             plt.title('t-SNE Visualization')
