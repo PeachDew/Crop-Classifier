@@ -199,7 +199,8 @@ with col3:
     "**Dimensions**",
     (2,3),
     index=1,
-    label_visibility="collapsed")
+    label_visibility="collapsed",
+    key=2)
 with col4:
     if genre:
         if genre == 2:
