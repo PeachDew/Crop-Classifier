@@ -77,7 +77,7 @@ with open("./pickle_objects/tsne3d.pkl", "rb") as file:
 col3, col4 = st.columns([1,5])
 with col3:
     genre = st.radio(
-    "### Dimensions",
+    "**Dimensions**",
     (2,3),
     index=1)
 with col4:
