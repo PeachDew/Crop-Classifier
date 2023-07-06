@@ -153,6 +153,7 @@ with col5:
     st.image("./plots/xgb_init_featimp.png")
 with col6:    
     st.image("./plots/xgb_init_cm.png")
+st.markdown("We get a pretty solid score of 28.6%, and XGBoost seemed to have picked out the reading at 770nm to be a pretty significant one. Considering we have 23 unique classes, the results are pretty good compared to a purely random guess which would be correct approximately 4% of the time.")    
             
             
 
