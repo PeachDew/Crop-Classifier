@@ -148,12 +148,12 @@ y_pred = base_model.predict(X_test)
 print("Done!")
 ''')
 st.markdown("Obtaining these results:")
-col5, col6 = st.columns([3,1])
+col5, col6 = st.columns([2,1])
 with col5:
     st.image("./plots/xgb_init_featimp.png")
 with col6:    
     st.image("./plots/xgb_init_cm.png")
-st.markdown("We get a pretty solid score of 28.6%, and XGBoost seemed to have picked out the reading at 770nm to be a pretty significant one. Considering we have 23 unique classes, the results are pretty good compared to a purely random guess which would be correct approximately 4% of the time.")    
+st.markdown("We achieved a commendable score of 28.6%, and XGBoost identified the reading at 770nm as particularly significant. It's worth noting that we are dealing with 23 distinct classes, so these results are quite promising compared to a completely random guess, which would only yield approximately 4% accuracy.")    
             
             
 
