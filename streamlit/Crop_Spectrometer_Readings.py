@@ -157,7 +157,7 @@ y_pred = base_model.predict(X_test)
 print("Done!")
 ''')
 st.markdown("Obtaining these results:")
-col5, col6 = st.columns(2)
+col5, col6 = st.columns([6,5])
 with col5:
     st.image("./plots/xgb_init_featimp.png")
 with col6:    
