@@ -78,7 +78,8 @@ col3, col4 = st.columns([1,5])
 with col3:
     genre = st.radio(
     "Dimensions",
-    (2,3))
+    (2,3),
+    index=1)
 with col4:
     if genre:
         if genre == 2:
