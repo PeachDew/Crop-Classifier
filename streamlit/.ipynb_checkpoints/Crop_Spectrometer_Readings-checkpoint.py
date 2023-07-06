@@ -96,7 +96,7 @@ with col4:
                 mode='markers',
                 marker=dict(
                     size=5,
-                    color=tsne_df['ePred'],
+                    color=tsne3df['ePred'],
                     colorscale='Viridis',
                     opacity=0.8
                 )
