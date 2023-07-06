@@ -16,7 +16,7 @@ st.set_page_config(page_title="SpeCROPmeter Readings", page_icon="🌱")
 
 
 st.markdown("""
-# Spectrometer Readings 🌾🌻🎃🍆
+# Spectrometer Readings 🌾🎃🍆
 """
 )
 
@@ -26,12 +26,15 @@ st.markdown("""
 with open("./pickle_objects/initdf.pkl", "rb") as file:
     df = pickle.load(file)
     
-st.markdown("### The Data:")
 st.markdown('''
 A total of 2650 grains of barley, chickpea and sorghum cultivars were scanned using the SCIO, a recently released miniaturized NIR spectrometer. For each cultivar, 50 grains were randomly selected for scanning.
 
 Column 740 to 1070 corresponds to the SCIO wavelengths, measured in nanometers (331 variables).
-Here is a sample of the initial un-preprocessed dataframe:
+
+This dataset was retrieved from kaggle and can be found [here](https://www.kaggle.com/datasets/fkosmowski/crop-varietal-identification-with-scio)''')    
+    
+st.markdown("## The Data: 🔍📊")
+st.markdown('''Here is a sample of the initial un-preprocessed dataframe:
 ''')
 st.dataframe(df.iloc[[1,50,100,150,200,250]],hide_index=True)
 col1, col2 = st.columns(2)
@@ -59,7 +62,12 @@ plt.savefig('./plots/eda_mean_read.png')
 plt.legend(loc=(1, 0.25))
 plt.show()
 ''')
-st.image("./plots/eda_mean_read.png")
+st.image("./plots/eda_mean_read.png", )
+
+st.markdown('''## TSNE: 🌌🗺️
+#### Visualising the data in a lower dimensional space
+t-SNE is a dimensionality reduction technique used for visualizing high-dimensional data in a lower-dimensional space. It creates a map where similar data points in the original space are closer together. By optimizing the positions of the points, t-SNE reveals underlying patterns and structures in complex datasets.''')
+
 
 
        
