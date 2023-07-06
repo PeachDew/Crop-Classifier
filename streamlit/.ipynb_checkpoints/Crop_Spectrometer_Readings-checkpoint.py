@@ -358,7 +358,7 @@ with coltun2:
 st.markdown("How did the tuned model perform on the test set? Unfortunately, it did not fare well. The accuracy reduced to 14.16%, which is significantly worse compared to the untuned model. The tuned hyperparameter configurations might have severely overfitted the train data.")    
 
 st.markdown("### Tuning XGBoost with Random Search 🎲⚙️")
-st.markdown("Let's try a different strategy with a different model! Here is a vanilla implementation of random search, as with the benefit of more easily integrating a tqdm progress bar:")
+st.markdown("Let's try a different strategy with a different model! Here is a vanilla implementation of random search, with the benefit of more easily integrating a tqdm progress bar:")
 st.code('''
 from sklearn.model_selection import cross_val_score
 from tqdm import tqdm
