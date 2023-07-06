@@ -3,6 +3,7 @@ import numpy as np
 import pickle
 import pandas as pd
 import matplotlib.pyplot as plt
+import plotly.graph_objects as go
 
 st.set_page_config(page_title="SpeCROPmeter Readings", page_icon="🌱")
 
@@ -68,13 +69,50 @@ st.markdown('''## t-SNE: 🌌🗺️
 #### Visualising the data in a lower dimensional space
 t-SNE (t-Distributed Stochastic Neighbor Embedding) is a dimensionality reduction technique used for visualizing high-dimensional data in a lower-dimensional space. It creates a map where similar data points in the original space are closer together. By optimizing the positions of the points, t-SNE reveals underlying patterns and structures in complex datasets.''')
 
+with open("./pickle_objects/tsne2d.pkl", "rb") as file:
+    tsne2df = pickle.load(file)
+with open("./pickle_objects/tsne3d.pkl", "rb") as file:
+    tsne3df = pickle.load(file)    
+
 col3, col4 = st.columns([1,5])
 with col3:
     genre = st.radio(
     "Dimensions",
     (2,3))
 with col4:
-    st.write("plot here")
+    if genre:
+        if genre == 2:
+            fig, ax = plt.subplots()
+            plt.scatter(tsne2df['Dimension 1'], tsne2df['Dimension 2'], c=tsne2df['ePred'])
+            plt.xlabel('Dimension 1')
+            plt.ylabel('Dimension 2')
+            plt.title('t-SNE Visualization')
+            st.pyplot(fig)
+        else:
+            fig = go.Figure(data=go.Scatter3d(
+                x=tsne3df['Dimension 1'],
+                y=tsne3df['Dimension 2'],
+                z=tsne3df['Dimension 3'],
+                mode='markers',
+                marker=dict(
+                    size=5,
+                    color=tsne_df['ePred'],
+                    colorscale='Viridis',
+                    opacity=0.8
+                )
+            ))
+
+            fig.update_layout(
+                scene=dict(
+                    xaxis_title='Dimension 1',
+                    yaxis_title='Dimension 2',
+                    zaxis_title='Dimension 3'
+                ),
+                title='t-SNE Visualization (3D)'
+            )
+            st.plotly_chart(fig)
+            
+            
 
 
        
