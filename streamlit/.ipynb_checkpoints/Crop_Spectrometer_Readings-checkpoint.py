@@ -17,7 +17,7 @@ st.set_page_config(page_title="SpeCROPmeter Readings", page_icon="🌱")
 
 st.markdown("""
 # Spectrometer readings of 
-# Crop variations🌾🌻🎃🍆
+## Crop variations🌾🌻🎃🍆
 """
 )
 
@@ -35,6 +35,8 @@ Column 740 to 1070 corresponds to the SCIO wavelengths, measured in nanometers (
 Here is a sample of the initial un-preprocessed dataframe:
 ''')
 st.dataframe(df.iloc[[1,50,100,150,200,250]],hide_index=True)
+
+
        
 
 
