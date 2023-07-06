@@ -15,8 +15,6 @@ st.set_page_config(page_title="SpeCROPmeter Readings", page_icon="🌱")
 #from sklearn.metrics import accuracy_score, roc_auc_score
 
 
-
-
 st.markdown("""
 # Analysing Spectrometer readings of Crop variations
 """
@@ -25,12 +23,13 @@ st.markdown("""
 #Load the models
 #with open("./models/logreg_model.pkl", "rb") as file:
 #    logreg_model = pickle.load(file)
-
+with open("./pickle_objects/initdf.pkl", "rb") as file:
+    df = pickle.load(file)
        
 
 col1, col2 = st.columns(2)
 with col1:
-    st.write("Hi!")
+    st.dataframe(df.head(20))
 with col2:
     st.write("Crop")
 
