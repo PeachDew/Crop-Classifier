@@ -109,9 +109,38 @@ with col4:
                     yaxis_title='Dimension 2',
                     zaxis_title='Dimension 3'
                 ),
-                title='t-SNE Visualization (3D)'
+                title='t-SNE Visualization (3D), try moving the plot with your mouse!'
             )
             st.plotly_chart(fig)
+            
+st.markdown('''
+While the plots produced certainly looks very intriguing and cool, separation between the various classes are poor. Perhaps the plot is cluttered with too many scatter points and classes. This is what Chat-GPT had to say:
+''')
+st.code('''
+When t-SNE dimension-reduced plots do not exhibit good separation between classes, it indicates that the data points from different classes are not clearly distinguishable in the lower-dimensional space. This lack of separation can occur due to various reasons. One possibility is that the data distributions of different classes overlap, making it challenging for t-SNE to effectively separate them. Another reason could be the presence of high intra-class variability, where data points within the same class are scattered and mixed together. Additionally, it's possible that the information contained in the original high-dimensional data is not fully captured by the t-SNE transformation, resulting in reduced discriminative power.''')
+
+st.markdown('''Before we explore alternatives in dimension reduction techniques, let us first train a model using all of the original variables to establish a baseline''')
+st.markdown("## Baseline Results")
+st.markdown("Let's use XGBoost as a baseline model and a simple training procedure:")
+st.code('''
+from sklearn.model_selection import cross_val_score, train_test_split
+from sklearn.metrics import accuracy_score, confusion_matrix
+import xgboost as xgb
+
+feature_cols = base_df_standardized.drop('ePred',axis=1).columns
+target = base_df['ePred']
+
+X_train, X_test, y_train, y_test = train_test_split(base_df_standardized[feature_cols], target, test_size=0.3, random_state=42)
+
+
+print("Fitting model...")
+base_model = xgb.XGBClassifier(n_estimators = 50, n_jobs = -1)  
+
+base_model.fit(X_train, y_train)
+
+y_pred = base_model.predict(X_test)
+print("Done!")
+''')
             
             
 
