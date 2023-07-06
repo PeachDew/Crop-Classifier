@@ -16,7 +16,8 @@ st.set_page_config(page_title="SpeCROPmeter Readings", page_icon="🌱")
 
 
 st.markdown("""
-# Analysing Spectrometer readings of Crop variations
+# Analysing Spectrometer readings of 
+Crop variations🌾🌻🎃🍆
 """
 )
 
@@ -30,7 +31,8 @@ st.markdown("### The Data:")
 st.markdown('''
 A total of 2650 grains of barley, chickpea and sorghum cultivars were scanned using the SCIO, a recently released miniaturized NIR spectrometer. For each cultivar, 50 grains were randomly selected for scanning.
 
-Column 740 to 1070 corresponds to the SCIO wavelengths, measured in nanometers (331 variables)
+Column 740 to 1070 corresponds to the SCIO wavelengths, measured in nanometers (331 variables).
+Here is a sample of the initial un-preprocessed dataframe:
 ''')
 st.dataframe(df.iloc[[1,50,100,150,200,250]],hide_index=True)
        
