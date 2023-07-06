@@ -244,9 +244,86 @@ with col8:
             st.plotly_chart(fig)
             
             
+st.markdown("Regrettably, upon examining the first three components, we observe limited distinction among them. Nevertheless, in the 3D visualization, we do identify four objects resembling cylinders, while one specific column appears to predominantly contain yellow scatter points.")
+
+st.markdown("## Classification using PCs as input 🔢🎯")
+st.markdown("Let's experiment with a range of models and see how they fare with the new principal components we generated.")
+st.code('''
+from sklearn.model_selection import cross_val_score
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.linear_model import LogisticRegression
+from sklearn.svm import SVC
+import xgboost as xgb
+from sklearn.metrics import confusion_matrix, roc_auc_score
+
+results = []
+confusion_matrices = []
+roc_auc = []
+
+print("Fitting XGBoost...")
+xgb_model = xgb.XGBClassifier()
+xgb_model.fit(pca_Xtrain, pca_ytrain)
+xgb_accuracy = xgb_model.score(pca_Xtest, pca_ytest)
+xgb_y_pred = xgb_model.predict(pca_Xtest)
+xgb_conf_matrix = confusion_matrix(pca_ytest, xgb_y_pred)
+xgb_roc_auc = roc_auc_score(pca_ytest, xgb_model.predict_proba(pca_Xtest), multi_class='ovr')
+
+roc_auc.append(xgb_roc_auc)
+results.append(xgb_accuracy)
+confusion_matrices.append(xgb_conf_matrix)
 
 
-            
+print("Fitting RandomForest...")
+rf_model = RandomForestClassifier()
+rf_model.fit(pca_Xtrain, pca_ytrain)
+rf_accuracy = rf_model.score(pca_Xtest, pca_ytest)
+rf_y_pred = rf_model.predict(pca_Xtest)
+rf_conf_matrix = confusion_matrix(pca_ytest, rf_y_pred)
+rf_roc_auc = roc_auc_score(pca_ytest, rf_model.predict_proba(pca_Xtest), multi_class='ovr')
+
+roc_auc.append(rf_roc_auc)
+results.append(rf_accuracy)
+confusion_matrices.append(rf_conf_matrix)
+
+
+print("Fitting Logistic Regression...")
+lr_model = LogisticRegression()
+lr_model.fit(pca_Xtrain, pca_ytrain)
+lr_accuracy = lr_model.score(pca_Xtest, pca_ytest)
+lr_y_pred = lr_model.predict(pca_Xtest)
+lr_conf_matrix = confusion_matrix(pca_ytest, lr_y_pred)
+lr_roc_auc = roc_auc_score(pca_ytest, lr_model.predict_proba(pca_Xtest), multi_class='ovr')
+
+roc_auc.append(lr_roc_auc)
+results.append(lr_accuracy)
+confusion_matrices.append(lr_conf_matrix)
+
+
+kernels = ['linear', 'poly', 'rbf', 'sigmoid']
+for kernel in kernels:
+    print(f"Fitting SVM ({kernel.capitalize()})...")
+    svm_model = SVC(kernel=kernel, probability=True)
+    svm_model.fit(pca_Xtrain, pca_ytrain)
+    svm_accuracy = svm_model.score(pca_Xtest, pca_ytest)
+    svm_y_pred = svm_model.predict(pca_Xtest)
+    svm_conf_matrix = confusion_matrix(pca_ytest, svm_y_pred)
+    svm_roc_auc = roc_auc_score(pca_ytest, svm_model.predict_proba(pca_Xtest), multi_class='ovr')
+    
+    roc_auc.append(svm_roc_auc)
+    results.append(svm_accuracy)
+    confusion_matrices.append(svm_conf_matrix)
+''')
+
+col9, col10 = st.columns(2)
+with col9:
+    st.write("We get these results:")
+with col10:
+    st.image("./plots/manymodels.png")
+st.markdown("And obtained these confusion matrices:")
+st.image('./plots/manycm.png')
+st.markdown("Logistic Regression and most SVM models (except the one with the RBF kernel) faced challenges in learning from the principal components, while the other models performed reasonably well. However, none of them approached the performance of the baseline model, which learned from the original dataset without dimensionality reduction.")
+    
+
             
 
 
