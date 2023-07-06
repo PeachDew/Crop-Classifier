@@ -370,8 +370,6 @@ param_grid = {
     'subsample': [0.5, 0.7, 0.9],
     'colsample_bytree': [0.5, 0.7, 0.9],
 }
-
-
 xgb_model = xgb.XGBClassifier(n_jobs=-1)
 n_iter = 20
 
@@ -404,6 +402,11 @@ with p1:
 with p2:
     st.image("./plots/bestparamsxgb.png")
     
+st.image('./plots/xgb_finalcm.png')
+
+with open("./pickle_objects/xgbfinalresults.pkl", "rb") as file:
+    xgbfinalresults = pickle.load(file)  
+st.dataframe(xgbfinalresults, hide_index=True)    
             
 
 
