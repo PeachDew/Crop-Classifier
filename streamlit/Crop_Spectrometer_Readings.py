@@ -29,7 +29,6 @@ with open("./pickle_objects/initdf.pkl", "rb") as file:
     
 st.markdown('''
 A total of 2650 grains of barley, chickpea and sorghum cultivars were scanned using the SCIO, a recently released miniaturized NIR spectrometer. For each cultivar, 50 grains were randomly selected for scanning.
-
 Column 740 to 1070 corresponds to the SCIO wavelengths, measured in nanometers (331 variables).
 
 This dataset was retrieved from kaggle and can be found [here](https://www.kaggle.com/datasets/fkosmowski/crop-varietal-identification-with-scio)''')    
@@ -410,7 +409,7 @@ with open("./pickle_objects/xgbfinalresults.pkl", "rb") as file:
 
 f1, f2 = st.columns([2,1])
 with f1:
-    st.markdown("How did the tuned models do this time? Fortunately, we see slight improvements to the untuned models this time.")
+    st.markdown("How did the tuned models do? Fortunately, we see slight improvements to the untuned models this time.")
 with f2:
     st.dataframe(xgbfinalresults, hide_index=True)
     
