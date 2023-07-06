@@ -77,7 +77,7 @@ with open("./pickle_objects/tsne3d.pkl", "rb") as file:
 col3, col4 = st.columns([1,5])
 with col3:
     genre = st.radio(
-    "Dimensions",
+    "### Dimensions",
     (2,3),
     index=1)
 with col4:
@@ -148,7 +148,7 @@ y_pred = base_model.predict(X_test)
 print("Done!")
 ''')
 st.markdown("Obtaining these results:")
-col5, col6 = st.columns([2,1])
+col5, col6 = st.columns(2)
 with col5:
     st.image("./plots/xgb_init_featimp.png")
 with col6:    
