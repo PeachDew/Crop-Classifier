@@ -129,7 +129,7 @@ of high intra-class variability, where data points within the same class
 are scattered and mixed together.''', language=None)
 
 st.markdown('''Before we explore alternatives in dimension reduction techniques, let us first train a model using all of the original variables to establish a baseline''')
-st.markdown("## Baseline Results")
+st.markdown("## Baseline Results 🧱📊")
 st.markdown("Let's first standardize the relevant numerical values")
 st.code('''
 from sklearn.preprocessing import StandardScaler
@@ -162,7 +162,28 @@ with col5:
     st.image("./plots/xgb_init_featimp.png")
 with col6:    
     st.image("./plots/xgb_init_cm.png")
-st.markdown("We achieved a commendable score of 28.6%, and XGBoost identified the reading at 770nm as particularly significant. It's worth noting that we are dealing with 23 distinct classes, so these results are quite promising compared to a completely random guess, which would only yield approximately 4% accuracy.")    
+st.markdown("We achieved a commendable score of 28.6%, and XGBoost identified the reading at 770nm as particularly significant. It's worth noting that we are dealing with 23 distinct classes, so these results are quite promising compared to a completely random guess, which would only yield approximately 4% accuracy.") 
+
+st.markdown("## PCA 🧩📊")
+st.markdown("Principal Component Analysis (PCA) is a popular dimensionality reduction technique used to simplify complex datasets while retaining their essential structure. The main objective of PCA is to transform a high-dimensional dataset into a lower-dimensional space by identifying the principal components that capture the most significant variations in the data.")
+st.markdown("### Differentiating the data")
+st.code('''
+from scipy.signal import savgol_filter
+
+X_dx = savgol_filter(base_df_standardized[feature_cols], 
+                     window_length=25, 
+                     polyorder = 5, 
+                     deriv=1)
+''')
+st.markdown('''
+Taking the first derivative of the data enables us to correct for baseline differences in the scans, and highlight the major sources of variation between the different scans. Numerical derivatives are generally unstable, so we use the smoothing filter implemented in scipy.signal, [savgol_filter](https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.savgol_filter.html) to smooth the derivative data out.
+Idea acknowledgement: https://nirpyresearch.com/classification-nir-spectra-principal-component-analysis-python/
+Let's plot the differentiated data for a sanity check:
+''')
+st.image("./plots/differentiate.png")
+
+
+
             
             
 
