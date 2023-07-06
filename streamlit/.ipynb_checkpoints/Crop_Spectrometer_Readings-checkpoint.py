@@ -401,12 +401,21 @@ with p1:
     st.markdown("We obtain the following best params:")
 with p2:
     st.image("./plots/bestparamsxgb.png")
+
+st.markdown("### Evaluating best params against train set")    
+with open("./pickle_objects/xgbfinalresults.pkl", "rb") as file:
+    xgbfinalresults = pickle.load(file) 
+
+f1, f2 = st.columns([5,2])
+with f1:
+    st.markdown("How did the tuned models do this time? Fortunately, we see slight improvements to the untuned models.")
+with f2:
+    st.dataframe(xgbfinalresults, hide_index=True)
     
 st.image('./plots/xgb_finalcm.png')
 
-with open("./pickle_objects/xgbfinalresults.pkl", "rb") as file:
-    xgbfinalresults = pickle.load(file)  
-st.dataframe(xgbfinalresults, hide_index=True)    
+
+    
             
 
 
