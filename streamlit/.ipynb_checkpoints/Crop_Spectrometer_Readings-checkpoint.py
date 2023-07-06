@@ -406,9 +406,9 @@ st.markdown("### Evaluating best params against train set")
 with open("./pickle_objects/xgbfinalresults.pkl", "rb") as file:
     xgbfinalresults = pickle.load(file) 
 
-f1, f2 = st.columns([5,2])
+f1, f2 = st.columns([2,1])
 with f1:
-    st.markdown("How did the tuned models do this time? Fortunately, we see slight improvements to the untuned models.")
+    st.markdown("How did the tuned models do this time? Fortunately, we see slight improvements to the untuned models this time.")
 with f2:
     st.dataframe(xgbfinalresults, hide_index=True)
     
