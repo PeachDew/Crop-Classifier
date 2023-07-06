@@ -188,6 +188,58 @@ From the article referenced [here](https://nirpyresearch.com/classification-nir-
 st.image("./plots/cumulvarpercent.png")
 st.markdown("If we follow that rule, we should only use the first component as it explains almost 100% of the original data. I decide to use the first 6 principal components instead, which explains around 90% of the first derivative data. In a 23-parameter dataset, it is unlikely that only the first principal component of PCA will capture all the essential information. While the first PC accounts for the largest variance in the data, it may not necessarily encompass all the meaningful patterns and relationships present in the dataset. Subsequent PCs capture additional variations orthogonal to the previous ones, providing a more comprehensive representation of the data.")
 
+col7, col8 = st.columns([1,5])
+
+with open("./pickle_objects/pcscores.pkl", "rb") as file:
+    Xt2 = pickle.load(file)
+    
+with col3:
+    st.markdown("**Select Dimension:**")
+    genre = st.radio(
+    "**Dimensions**",
+    (2,3),
+    index=1,
+    label_visibility="collapsed")
+with col4:
+    if genre:
+        if genre == 2:
+            st.image('./plots/2dpca.png')
+        else:
+            pc1_scores = Xt2[:, 0]
+            pc2_scores = Xt2[:, 1]
+            pc3_scores = Xt2[:, 2]
+
+            fig = go.Figure(data=go.Scatter3d(
+                x=pc1_scores,
+                y=pc2_scores,
+                z=pc3_scores,
+                mode='markers',
+                marker=dict(
+                    size=5,
+                    color=y_train,
+                    colorscale='Viridis',
+                    opacity=0.8,
+                    colorbar=dict(
+                        title='Class Labels',
+                        titleside='right',
+                        tickvals=list(label_mapping.keys()),
+                        ticktext=list(label_mapping.values())
+                    )
+                )
+            ))
+
+            # Set axis labels and title
+            fig.update_layout(scene=dict(
+                xaxis_title='PC1 Scores',
+                yaxis_title='PC2 Scores',
+                zaxis_title='PC3 Scores',
+                ),
+                title='Score Plot of PC1 vs PC2 vs PC3'
+            )
+            st.plotly_chart(fig)
+            
+            
+
 
             
             
