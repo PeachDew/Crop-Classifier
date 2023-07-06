@@ -64,10 +64,17 @@ plt.show()
 ''')
 st.image("./plots/eda_mean_read.png", )
 
-st.markdown('''## TSNE: 🌌🗺️
+st.markdown('''## t-SNE: 🌌🗺️
 #### Visualising the data in a lower dimensional space
-t-SNE is a dimensionality reduction technique used for visualizing high-dimensional data in a lower-dimensional space. It creates a map where similar data points in the original space are closer together. By optimizing the positions of the points, t-SNE reveals underlying patterns and structures in complex datasets.''')
+t-SNE (t-Distributed Stochastic Neighbor Embedding) is a dimensionality reduction technique used for visualizing high-dimensional data in a lower-dimensional space. It creates a map where similar data points in the original space are closer together. By optimizing the positions of the points, t-SNE reveals underlying patterns and structures in complex datasets.''')
 
+col3, col4 = st.columns([1,5])
+with col3:
+    genre = st.radio(
+    "Dimensions",
+    (2,3))
+with col4:
+    st.write("plot here")
 
 
        
