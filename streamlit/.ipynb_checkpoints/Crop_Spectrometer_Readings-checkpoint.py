@@ -16,8 +16,8 @@ st.set_page_config(page_title="SpeCROPmeter Readings", page_icon="🌱")
 
 
 st.markdown("""
-# Analysing Spectrometer readings of 
-Crop variations🌾🌻🎃🍆
+# Spectrometer readings of 
+# Crop variations🌾🌻🎃🍆
 """
 )
 
