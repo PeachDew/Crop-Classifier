@@ -324,7 +324,7 @@ st.image('./plots/manycm.png')
 st.markdown("Logistic Regression and most SVM models (except the one with the RBF kernel) faced challenges in learning from the principal components, while the other models performed reasonably well. However, none of them approached the performance of the baseline model, which learned from the original dataset without dimensionality reduction.")
 
 st.markdown("## Tuning promising models 🔧🎛️")
-st.markdown("### Tuning SVM with Grid Search")
+st.markdown("### Tuning SVM with Grid Search 📔⚙️")
 st.markdown("Lets tune the models which showed the most promise and see if we can beat our baseline accuracy score. I first started with using Grid Search and cross-validated the results of parameter combinations:")
 st.code('''
 from sklearn.model_selection import GridSearchCV
@@ -355,7 +355,7 @@ with coltun2:
     
 st.markdown("How did the tuned model perform on the test set? Unfortunately, it did not fare well. The accuracy reduced to 14.16%, which is significantly worse compared to the untuned model. The tuned hyperparameter configurations might have severely overfitted the train data.")    
 
-st.markdown("### Tuning XGBoost with Random Search")
+st.markdown("### Tuning XGBoost with Random Search 🎲⚙️")
 st.markdown("Let's try a different strategy with a different model! Here is a vanilla implementation of random search, as with the benefit of more easily integrating a tqdm progress bar:")
 st.code('''
 from sklearn.model_selection import cross_val_score
@@ -402,7 +402,7 @@ with p1:
 with p2:
     st.image("./plots/bestparamsxgb.png")
 
-st.markdown("### Evaluating best params against train set")    
+st.markdown("#### Evaluating best params against train set")    
 with open("./pickle_objects/xgbfinalresults.pkl", "rb") as file:
     xgbfinalresults = pickle.load(file) 
 
