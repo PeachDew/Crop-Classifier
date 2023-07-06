@@ -177,7 +177,9 @@ X_dx = savgol_filter(base_df_standardized[feature_cols],
 ''')
 st.markdown('''
 Taking the first derivative of the data enables us to correct for baseline differences in the scans, and highlight the major sources of variation between the different scans. Numerical derivatives are generally unstable, so we use the smoothing filter implemented in scipy.signal, [savgol_filter](https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.savgol_filter.html) to smooth the derivative data out.
+
 Idea acknowledgement: https://nirpyresearch.com/classification-nir-spectra-principal-component-analysis-python/
+
 Let's plot the differentiated data for a sanity check:
 ''')
 st.image("./plots/differentiate.png")
