@@ -53,7 +53,7 @@ plt.savefig('./plots/eda_mean_read.png')
 plt.legend(loc=(1, 0.25))
 plt.show()
 ''')
-st.image("./plots/eda_mean_read.png")
+st.image("./plots/eda_mean_read_2.png")
 
 st.markdown('''## t-SNE: 🌌🗺️
 #### Visualising the data in a lower dimensional space
