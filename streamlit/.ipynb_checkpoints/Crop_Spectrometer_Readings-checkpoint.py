@@ -192,6 +192,8 @@ col7, col8 = st.columns([1,5])
 
 with open("./pickle_objects/pcscores.pkl", "rb") as file:
     Xt2 = pickle.load(file)
+with open("./pickle_objects/ytrain.pkl", "rb") as file:
+    y_train = pickle.load(file)    
     
 with col3:
     st.markdown("**Select Dimension:**")
