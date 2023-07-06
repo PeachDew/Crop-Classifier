@@ -324,6 +324,7 @@ st.image('./plots/manycm.png')
 st.markdown("Logistic Regression and most SVM models (except the one with the RBF kernel) faced challenges in learning from the principal components, while the other models performed reasonably well. However, none of them approached the performance of the baseline model, which learned from the original dataset without dimensionality reduction.")
 
 st.markdown("## Tuning promising models 🔧🎛️")
+st.markdown("### Tuning SVM with Grid Search")
 st.markdown("Lets tune the models which showed the most promise and see if we can beat our baseline accuracy score. I first started with using Grid Search and cross-validated the results of parameter combinations:")
 st.code('''
 from sklearn.model_selection import GridSearchCV
@@ -344,12 +345,69 @@ mean_scores = results['mean_test_score']
 std_scores = results['std_test_score']
 param_C = results['param_C']
 ''')
-st.markdown("A few images of the tuning process:")
+st.markdown("A few images of the tuning process:") 
+st.markdown("It was quite clear from the initial tune that gamma set to 'scale' produced better results across the board. For the second tune we tried finding the best value of C the regularization parameter, which came up to approximately 8.437.")
 coltun1, coltun2 = st.columns(2)
 with coltun1:
     st.image("./plots/gridsearch_results_initial_tune.png")
 with coltun2:
     st.image("./plots/gridsearch_results_final_tune.png")
+    
+st.markdown("How did the tuned model perform on the test set? Unfortunately, it did not fare well. The accuracy reduced to 14.16%, which is significantly worse compared to the untuned model. The tuned hyperparameter configurations might have severely overfitted the train data.")    
+
+st.markdown("### Tuning XGBoost with Random Search")
+st.markdown("Let's try a different strategy with a different model! Here is a vanilla implementation of random search, as with the benefit of more easily integrating a tqdm progress bar:")
+st.code('''
+from sklearn.model_selection import cross_val_score
+from tqdm import tqdm
+import random
+import itertools
+
+param_grid = {
+    'n_estimators': [100, 200, 300, 400, 500],
+    'max_depth': [3, 4, 5, 6],
+    'learning_rate': [0.01, 0.1, 0.2, 0.3],
+    'subsample': [0.5, 0.7, 0.9],
+    'colsample_bytree': [0.5, 0.7, 0.9],
+}
+
+
+xgb_model = xgb.XGBClassifier(n_jobs=-1)
+n_iter = 20
+
+
+
+tqdm._instances.clear() # For avoiding duplicate bars in J-lab
+pbar = tqdm(total=n_iter, desc='Random Search Progress')
+
+best_results = []
+for _ in range(n_iter):
+    params = {param: random.choice(values) for param, values in param_grid.items()}
+    xgb_model.set_params(**params)
+    scores = cross_val_score(xgb_model, pca_Xtrain, pca_ytrain, cv=3, scoring='accuracy')
+    mean_score = np.mean(scores)
+    result = {'params': params, 'score': mean_score}
+    
+    best_results.append(result)
+    best_results.sort(key=lambda x: x['score'], reverse=True)
+    
+    # Keep only the top 5 results
+    best_results = best_results[:5]
+
+    pbar.update(1)
+
+pbar.close()
+
+print("Best 5 Results and Parameters:")
+for i, result in enumerate(best_results):
+    print(f"Rank {i+1}: Score = {result['score']}, Parameters = {result['params']}")
+''')
+p1, p2 = st.columns(2)
+with p1:
+    st.markdown("We obtain the following best params:")
+with p2:
+    st.image("./plots/bestparamsxgb.png")
+    
             
 
 
