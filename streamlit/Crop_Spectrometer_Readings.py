@@ -375,8 +375,6 @@ param_grid = {
 xgb_model = xgb.XGBClassifier(n_jobs=-1)
 n_iter = 20
 
-
-
 tqdm._instances.clear() # For avoiding duplicate bars in J-lab
 pbar = tqdm(total=n_iter, desc='Random Search Progress')
 
@@ -393,16 +391,14 @@ for _ in range(n_iter):
     
     # Keep only the top 5 results
     best_results = best_results[:5]
-
     pbar.update(1)
-
 pbar.close()
 
 print("Best 5 Results and Parameters:")
 for i, result in enumerate(best_results):
     print(f"Rank {i+1}: Score = {result['score']}, Parameters = {result['params']}")
 ''')
-p1, p2 = st.columns(2)
+p1, p2 = st.columns([2,3])
 with p1:
     st.markdown("We obtain the following best params:")
 with p2:
