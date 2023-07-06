@@ -322,8 +322,34 @@ with col10:
 st.markdown("And obtained these confusion matrices:")
 st.image('./plots/manycm.png')
 st.markdown("Logistic Regression and most SVM models (except the one with the RBF kernel) faced challenges in learning from the principal components, while the other models performed reasonably well. However, none of them approached the performance of the baseline model, which learned from the original dataset without dimensionality reduction.")
-    
 
+st.markdown("## Tuning promising models 🔧🎛️")
+st.markdown("Lets tune the models which showed the most promise and see if we can beat our baseline accuracy score. I first started with using Grid Search and cross-validated the results of parameter combinations:")
+st.code('''
+from sklearn.model_selection import GridSearchCV
+
+param_grid = {'C': np.linspace(0.1, 10, 20),
+              'kernel': ['rbf'],
+              'gamma': ['scale', 'auto']}
+svm_model = SVC(probability=True)
+
+print("Performing GridSearch...")
+grid_search = GridSearchCV(svm_model, param_grid, cv=5)
+grid_search.fit(pca_Xtrain, pca_ytrain)
+print("Done!")
+
+# extract the grid search results
+results = grid_search.cv_results_
+mean_scores = results['mean_test_score']
+std_scores = results['std_test_score']
+param_C = results['param_C']
+''')
+st.markdown("A few images of the tuning process:")
+coltun1, coltun2 = st.columns(2)
+with coltun1:
+    st.image("./plots/gridsearch_results_initial_tune.png")
+with coltun2:
+    st.image("./plots/gridsearch_results_final_tune.png")
             
 
 
