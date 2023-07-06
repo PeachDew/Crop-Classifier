@@ -37,10 +37,29 @@ st.dataframe(df.iloc[[1,50,100,150,200,250]],hide_index=True)
 col1, col2 = st.columns(2)
 with col1:
     st.markdown('''
-In the dataframe above, we see crops named in shorthand. For example, for predictors that start with "HB" are cultivars of Barley.
+In the dataframe above, we see crops named in shorthand. For example, predictors that start with "HB" are cultivars of Barley. 
 ''')
 with col2:
     st.image("https://cdn-prod.medicalnewstoday.com/content/images/articles/295/295268/barley-grains-in-a-wooden-bowl.jpg")
+    
+st.markdown(''' 
+Let's have an idea of the shape of the readings. We plot the mean of the readings for each cultivar type with the code below:''')
+st.code('''
+plt.figure(figsize=(10, 8))
+for i in range(0,mean_df.shape[0]):
+    Y = mean_df.iloc[i]
+    X = mean_df.columns.astype(int)
+    plt.plot(X, Y, label=Y.name)
+
+plt.xlabel('Wavelength')
+plt.ylabel('Mean reading')
+plt.title('Mean reading for each crop type')
+plt.savefig('./plots/eda_mean_read.png')
+
+plt.legend(loc=(1, 0.25))
+plt.show()
+''')
+st.image("./plots/eda_mean_read.png")
 
 
        
