@@ -182,6 +182,11 @@ Let's plot the differentiated data for a sanity check:
 ''')
 st.image("./plots/differentiate.png")
 
+st.markdown('''
+From the article referenced [here](https://nirpyresearch.com/classification-nir-spectra-principal-component-analysis-python/), the author suggests that "a good rule of thumb is to choose the number of principal components by looking at the cumulative variance of the decomposed (original) spectral data." So let's take a look at plots of explained and cumulative variance.
+''')
+st.image("./plots/cumulvarpercent.png")
+st.markdown("If we follow that rule, we should only use the first component as it explains almost 100% of the original data. I decide to use the first 6 principal components instead, which explains around 90% of the first derivative data. In a 23-parameter dataset, it is unlikely that only the first principal component of PCA will capture all the essential information. While the first PC accounts for the largest variance in the data, it may not necessarily encompass all the meaningful patterns and relationships present in the dataset. Subsequent PCs capture additional variations orthogonal to the previous ones, providing a more comprehensive representation of the data.")
 
 
             
