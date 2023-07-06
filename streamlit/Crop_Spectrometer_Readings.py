@@ -76,6 +76,7 @@ with open("./pickle_objects/tsne3d.pkl", "rb") as file:
 
 col3, col4 = st.columns([1,5])
 with col3:
+    
     genre = st.radio(
     "**Dimensions**",
     (2,3),
@@ -116,8 +117,15 @@ with col4:
 st.markdown('''
 While the plots produced certainly looks very intriguing and cool, separation between the various classes are poor. Perhaps the plot is cluttered with too many scatter points and classes. This is what Chat-GPT had to say:
 ''')
-st.write('''
-When t-SNE dimension-reduced plots do not exhibit good separation between classes, it indicates that the data points from different classes are not clearly distinguishable in the lower-dimensional space. This lack of separation can occur due to various reasons. One possibility is that the data distributions of different classes overlap, making it challenging for t-SNE to effectively separate them. Another reason could be the presence of high intra-class variability, where data points within the same class are scattered and mixed together. Additionally, it's possible that the information contained in the original high-dimensional data is not fully captured by the t-SNE transformation, resulting in reduced discriminative power.''')
+st.code('''
+When t-SNE dimension-reduced plots do not exhibit good separation between classes, it indicates that the 
+data points from different classes are not clearly distinguishable in the lower-dimensional space. This
+lack of separation can occur due to various reasons. One possibility is that the data distributions of 
+different classes overlap, making it challenging for t-SNE to effectively separate them. Another reason 
+could be the presence of high intra-class variability, where data points within the same class are 
+scattered and mixed together. Additionally, it's possible that the information contained in the original 
+high-dimensional data is not fully captured by the t-SNE transformation, resulting in reduced 
+discriminative power.''', language=None)
 
 st.markdown('''Before we explore alternatives in dimension reduction techniques, let us first train a model using all of the original variables to establish a baseline''')
 st.markdown("## Baseline Results")
