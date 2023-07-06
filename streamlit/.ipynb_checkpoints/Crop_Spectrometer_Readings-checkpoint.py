@@ -414,6 +414,8 @@ with f2:
     
 st.image('./plots/xgb_finalcm.png')
 
+st.markdown("In this project, I employed Principal Component Analysis (PCA) to reduce the dimensionality of the dataset. Following dimensionality reduction, I fitted and tuned two models, expecting them to outperform a model trained on the original unreduced dataset. However, contrary to my expectations, both tuned models exhibited inferior performance compared to the model trained on the unreduced dataset. 😩 I strongly suspect that the limited nature of the data (only 50 samples per class for 23 classes) played a significant factor. There is still a lot for me to learn and improve on regarding PCA, dimensionality reduction, and dealing with temporal data like spectrometer readings.")
+
 
     
             
