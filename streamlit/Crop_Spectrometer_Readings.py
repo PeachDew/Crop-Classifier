@@ -14,10 +14,10 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, roc_auc_score
 '''
 
-st.set_page_config(page_title="Tumor Classification")
+st.set_page_config(page_title="SpeCROPmeter Readings", page_icon="🌱")
 
 st.markdown("""
-# Analysing Crop Spectrometer Readings
+# Analysing Spectrometer readings of Crop variations
 """
 )
 
