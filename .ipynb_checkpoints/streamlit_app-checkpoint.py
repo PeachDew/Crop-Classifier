@@ -7,15 +7,6 @@ import plotly.graph_objects as go
 
 st.set_page_config(page_title="SpeCROPmeter Readings", page_icon="🌱")
 
-#from sklearn.preprocessing import StandardScaler, MinMaxScaler
-#from sklearn.feature_selection import mutual_info_regression
-#from sklearn.linear_model import LogisticRegression
-#from sklearn.model_selection import train_test_split
-#from sklearn.svm import SVC
-#from sklearn.ensemble import RandomForestClassifier
-#from sklearn.metrics import accuracy_score, roc_auc_score
-
-
 st.markdown("""
 # Spectrometer Readings 🌾🎃🍆
 """
